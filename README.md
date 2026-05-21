@@ -7,7 +7,7 @@ Daily Note
         - Unity Engine doesn't know why the object has been moved
 2. linearVelocity
     - Move the Object every second
-        - Calculating by Unity Physics Engine working for speed, gravity, collision, etc,.
+        - Calculating by Unity Physics Engine works for speed, gravity, collision, etc,.
         - Usually  works with Jump, Knock Back, Sliding, Gravity, etc,.
 
 
@@ -16,4 +16,27 @@ The importance thing is that working object and Rigidbidy with transform.positio
 So, in the game environment, the game developers use
 - linearVelocity for movement
 - AddForce or velocity for jump
+
+
+using UnityEngine;
+
+public class Player : MonoBehaviour
+{
+    [SerializeField]
+    private float speed = 5f;
+
+    private Rigidbody2D rb;
+
+    private void Awake()
+    {
+        rb = GetComponent<Rigidbody2D>();
+    }
+
+    private void FixedUpdate()
+    {
+        float x = Input.GetAxisRaw("Horizontal");
+
+        rb.linearVelocity = new Vector2(x * speed, rb.linearVelocity.y);
+    }
+}
 
